@@ -66,7 +66,14 @@
   .nav .pill{padding:9px 20px;font-size:14px}
 
   /* ---------- Hero ---------- */
-  .hero{padding:clamp(56px,9vw,112px) 0 var(--section)}
+  /* Hero : vidéo de démonstration en fond, sans son, sous un voile noir */
+  .hero{position:relative;overflow:hidden;margin-top:-68px;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;
+    padding:calc(68px + clamp(56px,9vw,112px)) 0 clamp(56px,8vw,96px)}
+  .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;z-index:0}
+  .hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.78);z-index:1}
+  .hero > .wrap{position:relative;z-index:2;width:100%}
+  .nav{transition:background .3s}
+  .nav.on-hero{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
   .hero .eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:28px}
   .hero .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--spark);box-shadow:0 0 0 0 rgba(220,255,79,.6);animation:ping 2.2s infinite}
   @keyframes ping{0%{box-shadow:0 0 0 0 rgba(220,255,79,.55)}70%{box-shadow:0 0 0 10px rgba(220,255,79,0)}100%{box-shadow:0 0 0 0 rgba(220,255,79,0)}}
@@ -210,6 +217,9 @@
 
   <!-- HERO -->
   <header class="hero">
+    <video class="hero-video" id="hero-video" autoplay muted loop playsinline preload="auto" poster="img/el-qaada.png" aria-hidden="true">
+      <source src="video/hero.mp4" type="video/mp4">
+    </video>
     <div class="wrap">
       <div class="eyebrow caption"><span class="dot"></span>Conception de sites vitrines · Toulouse</div>
       <h1 class="display">Des sites qui donnent envie de pousser la porte.</h1>
@@ -217,22 +227,6 @@
         <p>Restaurants, boutiques, artisans : je crée le site de votre commerce avec votre vraie carte, vos horaires et vos avis. Vous voyez le résultat avant de vous engager.</p>
         <div class="ctas">
           <a class="ghost" href="#projets">Voir les projets ↓</a>
-        </div>
-      </div>
-
-      <div class="showcase reveal">
-        <div class="browser">
-          <div class="bar"><span></span><span></span><span></span><div class="url" id="show-url">kevinhadad36.github.io/el-qaada</div></div>
-          <div class="screen" id="show-screen">
-            <img class="on" src="img/el-qaada.png" alt="Site de Toulouse Factory, smash burgers" data-url="kevinhadad36.github.io/el-qaada" data-name="Toulouse Factory">
-            <img src="img/grande-istanbul.png" alt="Site de Galata Grill, restaurant turc" data-url="kevinhadad36.github.io/grande-istanbul" data-name="Galata Grill" loading="lazy">
-            <img src="img/iqra-toulouse.png" alt="Site d'Iqra Toulouse, cours de Coran" data-url="kevinhadad36.github.io/iqra-toulouse" data-name="Iqra Toulouse" loading="lazy">
-            <img src="img/monimo.png" alt="Site de Monimo, agence immobilière" data-url="kevinhadad36.github.io/monimo" data-name="Monimo Immobilier" loading="lazy">
-          </div>
-        </div>
-        <div class="showcase-meta">
-          <span class="caption" id="show-name">Toulouse Factory</span>
-          <div class="dots" id="show-dots" aria-label="Choisir le projet affiché"></div>
         </div>
       </div>
     </div>
@@ -410,26 +404,17 @@
   document.getElementById('y').textContent = new Date().getFullYear();
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ---------- Vitrine du hero : fondu entre quelques projets ----------
-  const imgs = [...document.querySelectorAll('#show-screen img')];
-  const dots = document.getElementById('show-dots');
-  let cur = 0, timer;
-  imgs.forEach((im, i) => {
-    const b = document.createElement('button');
-    b.setAttribute('aria-label', im.dataset.name);
-    b.setAttribute('aria-current', i === 0);
-    b.addEventListener('click', () => { show(i); restart(); });
-    dots.appendChild(b);
-  });
-  function show(i){
-    imgs[cur].classList.remove('on'); dots.children[cur].setAttribute('aria-current', false);
-    cur = i;
-    imgs[cur].classList.add('on'); dots.children[cur].setAttribute('aria-current', true);
-    document.getElementById('show-url').textContent = imgs[cur].dataset.url;
-    document.getElementById('show-name').textContent = imgs[cur].dataset.name;
-  }
-  function restart(){ clearInterval(timer); if (!reduce) timer = setInterval(() => show((cur + 1) % imgs.length), 4000); }
-  restart();
+  // ---------- Vidéo du hero : toujours muette, figée si l'utilisateur limite les animations ----------
+  const video = document.getElementById('hero-video');
+  video.muted = true;
+  if (reduce) { video.removeAttribute('autoplay'); video.pause(); }
+  else video.play().catch(() => {});
+
+  // La barre de navigation reste transparente tant qu'elle est sur la vidéo.
+  const nav = document.querySelector('.nav'), hero = document.querySelector('.hero');
+  const onScroll = () => nav.classList.toggle('on-hero', scrollY < hero.offsetHeight - 80);
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
   // ---------- Filtres des projets ----------
   const fbtns = document.querySelectorAll('.filters button');
