@@ -144,6 +144,11 @@
   .included li:nth-child(even){padding-left:24px;border-left:1px solid #2a2a2a}
   .included li span:first-child{color:var(--spark)}
 
+  /* ---------- Encart formation ---------- */
+  .teach{display:grid;gap:16px;border:1px solid #2a2a2a;border-radius:24px;padding:clamp(24px,4vw,48px);transition:border-color .3s}
+  .teach:hover{border-color:var(--spark)}
+  .teach-row{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+
   /* ---------- Contact (carte inversée) ---------- */
   .contact{background:var(--cream);color:var(--void);border-radius:24px;padding:clamp(32px,6vw,72px);display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:end}
   .contact .muted{color:#555}
@@ -194,6 +199,7 @@
       <li><a href="#projets">Projets</a></li>
       <li><a href="#process">Process</a></li>
       <li><a href="#inclus">Ce qui est inclus</a></li>
+      <li><a href="formation.html">Formation</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a class="pill" href="https://wa.me/33641478339?text=Bonjour%20Kevin%2C%20je%20voudrais%20un%20site%20pour%20mon%20commerce." target="_blank" rel="noopener">Parlons de votre site</a>
@@ -364,6 +370,17 @@
     </div>
   </section>
 
+  <!-- FORMATION -->
+  <section class="band">
+    <div class="wrap">
+      <a class="teach reveal" href="formation.html">
+        <span class="caption">Formation</span>
+        <span class="teach-row"><span class="heading">Vous voulez apprendre à faire ça ?</span><span class="pill">Découvrir la formation →</span></span>
+        <span class="muted">Direction artistique, construction avec l'IA, mise en ligne et premiers clients : la méthode derrière ces projets.</span>
+      </a>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section id="contact" class="band" style="border-top:0;padding-top:0">
     <div class="wrap">
@@ -385,7 +402,7 @@
 <footer>
   <div class="wrap foot">
     <span>© <span id="y">2026</span> Kevin · Conception de sites vitrines</span>
-    <span><a href="#projets">Projets</a> · <a href="#process">Process</a> · <a href="#contact">Contact</a></span>
+    <span><a href="#projets">Projets</a> · <a href="#process">Process</a> · <a href="formation.html">Formation</a> · <a href="#contact">Contact</a></span>
   </div>
 </footer>
 
