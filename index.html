@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kevin — Sites vitrines pour commerces</title>
+<meta name="description" content="Je conçois des sites vitrines pour les commerces de Toulouse : restaurants, boutiques, artisans. Une maquette réalisée avec vos vraies informations avant même notre premier rendez-vous.">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400&family=Inter:wght@400&display=swap" rel="stylesheet">
+<style>
+  /* Système repris du DESIGN.md « Madebyon » (Refero Styles) :
+     galerie noire, texte crème, une seule étincelle chartreuse. Défilement natif, aucune capture du scroll. */
+  :root{
+    --void:#000000;      /* fond */
+    --cream:#faf9f4;     /* texte, filets, cartes inversées */
+    --charcoal:#151515;  /* surfaces légèrement relevées */
+    --smoke:#666666;     /* texte secondaire, filets atténués */
+    --fog:#bdbdbd;       /* texte tertiaire */
+    --spark:#dcff4f;     /* chartreuse : une action principale par écran */
+
+    --max:1200px;
+    --gutter:clamp(16px,4vw,40px);
+    --section:80px;
+
+    --display:"Archivo","Favorit",ui-sans-serif,system-ui,sans-serif;
+    --body:"Inter","Favorit",ui-sans-serif,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--void);color:var(--cream);font:400 16px/1.5 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  section{scroll-margin-top:80px}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+  ::selection{background:var(--spark);color:var(--void)}
+
+  /* ---------- Type ---------- */
+  .display{font:400 clamp(40px,6vw,76px)/1.08 var(--display);font-stretch:125%;letter-spacing:-.02em}
+  .heading{font:400 clamp(30px,3.6vw,48px)/1.15 var(--display);font-stretch:125%;letter-spacing:-.02em}
+  .sub{font-size:24px;line-height:1.35}
+  .caption{font-size:12px;line-height:1.5;letter-spacing:.02em;color:var(--fog)}
+  .muted{color:var(--fog)}
+  .spark{color:var(--spark)}
+
+  /* ---------- Boutons ---------- */
+  .pill{display:inline-flex;align-items:center;gap:10px;padding:12px 25px;border-radius:999px;background:var(--spark);color:var(--void);
+    font:400 16px/1.3 var(--body);border:1px solid var(--spark);transition:transform .2s,background .2s}
+  .pill:hover{transform:translateY(-1px);background:#e8ff85}
+  .ghost{display:inline-flex;align-items:center;gap:10px;padding:12px 25px;border-radius:50px;border:1px solid var(--cream);color:var(--cream);
+    font:400 16px/1.3 var(--body);transition:background .2s,color .2s}
+  .ghost:hover{background:var(--cream);color:var(--void)}
+  .tag{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--smoke);font-size:12px;line-height:1.4;color:var(--fog)}
+
+  /* ---------- Nav ---------- */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.82);backdrop-filter:saturate(1.2) blur(10px);-webkit-backdrop-filter:blur(10px)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:68px}
+  .brand{font:400 20px/1 var(--display);font-stretch:125%;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+  .brand i{width:10px;height:10px;border-radius:50%;background:var(--spark);display:inline-block}
+  .nav ul{list-style:none;display:flex;gap:28px;font-size:14px}
+  .nav ul a{position:relative;padding:4px 0}
+  .nav ul a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--spark);transition:right .25s}
+  .nav ul a:hover{color:var(--spark)}
+  .nav ul a:hover::after{right:0}
+  .nav .pill{padding:9px 20px;font-size:14px}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:clamp(56px,9vw,112px) 0 var(--section)}
+  .hero .eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+  .hero .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--spark);box-shadow:0 0 0 0 rgba(220,255,79,.6);animation:ping 2.2s infinite}
+  @keyframes ping{0%{box-shadow:0 0 0 0 rgba(220,255,79,.55)}70%{box-shadow:0 0 0 10px rgba(220,255,79,0)}100%{box-shadow:0 0 0 0 rgba(220,255,79,0)}}
+  .hero h1{max-width:15ch}
+  .hero-row{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-top:36px;flex-wrap:wrap}
+  .hero-row p{max-width:46ch;color:var(--fog)}
+  .hero-row .ctas{display:flex;gap:12px;flex-wrap:wrap}
+
+  /* Fenêtre de navigateur */
+  .browser{background:var(--charcoal);border:1px solid #2a2a2a;border-radius:16px;overflow:hidden}
+  .browser .bar{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid #2a2a2a}
+  .browser .bar span{width:11px;height:11px;border-radius:50%}
+  .browser .bar span:nth-child(1){background:#ff5f57}.browser .bar span:nth-child(2){background:#febc2e}.browser .bar span:nth-child(3){background:#28c840}
+  .browser .url{margin-left:12px;flex:1;max-width:420px;background:var(--void);border-radius:999px;padding:5px 14px;font-size:12px;color:var(--fog);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .browser .screen{position:relative;aspect-ratio:16/10;background:#0b0b0b;overflow:hidden}
+  .browser .screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+
+  .showcase{margin-top:clamp(48px,7vw,80px)}
+  .showcase .screen img{opacity:0;transition:opacity .9s ease}
+  .showcase .screen img.on{opacity:1}
+  .showcase-meta{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:16px;flex-wrap:wrap}
+  .dots{display:flex;gap:8px}
+  .dots button{width:28px;height:4px;border-radius:999px;border:0;background:#333;cursor:pointer;padding:0}
+  .dots button[aria-current="true"]{background:var(--spark)}
+
+  /* ---------- Intro ---------- */
+  .band{padding:var(--section) 0;border-top:1px solid #1f1f1f}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,96px)}
+  .two p + p{margin-top:16px}
+
+  /* Bandeau de noms */
+  .names{border-top:1px solid #1f1f1f;border-bottom:1px solid #1f1f1f;overflow:hidden;padding:26px 0}
+  .names-track{display:flex;gap:56px;width:max-content;animation:slide 40s linear infinite}
+  .names span{font:400 22px/1 var(--display);font-stretch:125%;letter-spacing:-.02em;color:var(--cream);opacity:.85;white-space:nowrap}
+  .names span::before{content:"✦";color:var(--spark);margin-right:56px;font-size:14px;vertical-align:middle}
+  @keyframes slide{to{transform:translateX(-50%)}}
+
+  /* ---------- Projets ---------- */
+  .head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+  .filters{display:flex;gap:8px;flex-wrap:wrap}
+  .filters button{background:transparent;border:1px solid var(--smoke);color:var(--fog);border-radius:999px;padding:7px 16px;font:400 13px/1.3 var(--body);cursor:pointer;transition:all .2s}
+  .filters button:hover{border-color:var(--cream);color:var(--cream)}
+  .filters button[aria-pressed="true"]{border-color:var(--cream);background:var(--cream);color:var(--void)}
+
+  .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:48px 32px}
+  .project{display:block}
+  .project.wide{grid-column:1/-1}
+  .project .browser{transition:border-color .3s,transform .4s cubic-bezier(.2,.7,.2,1)}
+  .project .screen img{transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+  .project:hover .browser{border-color:var(--cream)}
+  .project:hover .screen img{transform:scale(1.03)}
+  .project .meta{display:grid;grid-template-columns:1fr auto;gap:6px 16px;margin-top:18px;align-items:start}
+  .project h3{font:400 24px/1.25 var(--display);font-stretch:125%;letter-spacing:-.02em}
+  .project .go{font-size:14px;display:inline-flex;align-items:center;gap:6px;padding-top:4px;transition:color .2s}
+  .project:hover .go{color:var(--spark)}
+  .project .desc{grid-column:1/-1;color:var(--fog);font-size:15px;max-width:62ch}
+  .project .tags{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+  .project[hidden]{display:none}
+
+  /* ---------- Process ---------- */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+  .step{border:1px solid #2a2a2a;border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:14px;min-height:300px;transition:border-color .3s}
+  .step:hover{border-color:var(--cream)}
+  .step .n{font:400 40px/1 var(--display);font-stretch:125%;color:var(--spark);letter-spacing:-.02em}
+  .step h3{font:400 22px/1.25 var(--display);font-stretch:125%;letter-spacing:-.02em;margin-top:auto}
+  .step p{color:var(--fog);font-size:15px}
+  .note{margin-top:32px;display:flex;gap:14px;align-items:flex-start;background:var(--charcoal);border-radius:24px;padding:24px;max-width:860px}
+  .note b{font-weight:400;color:var(--spark);flex:0 0 auto}
+  .note p{color:var(--fog);font-size:15px}
+
+  /* ---------- Inclus ---------- */
+  .included{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid #2a2a2a}
+  .included li{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid #2a2a2a}
+  .included li:nth-child(odd){padding-right:24px}
+  .included li:nth-child(even){padding-left:24px;border-left:1px solid #2a2a2a}
+  .included li span:first-child{color:var(--spark)}
+
+  /* ---------- Contact (carte inversée) ---------- */
+  .contact{background:var(--cream);color:var(--void);border-radius:24px;padding:clamp(32px,6vw,72px);display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:end}
+  .contact .muted{color:#555}
+  .contact .actions{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+  .contact .pill{background:var(--void);color:var(--spark);border-color:var(--void)}
+  .contact .pill:hover{background:#222}
+  .contact .ghost{border-color:var(--void);color:var(--void)}
+  .contact .ghost:hover{background:var(--void);color:var(--cream)}
+
+  footer{padding:48px 0 40px}
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:var(--smoke);font-size:13px}
+  .foot a:hover{color:var(--cream)}
+
+  /* ---------- Apparitions (n'empêchent jamais le défilement) ---------- */
+  .js .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+  .js .reveal.in{opacity:1;transform:none}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:960px){
+    .nav ul{display:none}
+    .two{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr 1fr}
+    .contact{grid-template-columns:1fr}
+  }
+  @media (max-width:680px){
+    .projects{grid-template-columns:1fr;gap:40px}
+    .steps{grid-template-columns:1fr}
+    .step{min-height:0}
+    .included{grid-template-columns:1fr}
+    .included li:nth-child(n){padding-left:0;padding-right:0;border-left:0}
+    .browser .url{display:none}
+    .nav .pill{padding:8px 16px}
+    .sub{font-size:20px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+    .js .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+
+<nav class="nav" aria-label="Navigation principale">
+  <div class="wrap nav-in">
+    <a href="#top" class="brand"><i></i>Kevin</a>
+    <ul>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#inclus">Ce qui est inclus</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="pill" href="https://wa.me/33641478339?text=Bonjour%20Kevin%2C%20je%20voudrais%20un%20site%20pour%20mon%20commerce." target="_blank" rel="noopener">Parlons de votre site</a>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow caption"><span class="dot"></span>Conception de sites vitrines · Toulouse</div>
+      <h1 class="display">Des sites qui donnent envie de pousser la porte.</h1>
+      <div class="hero-row">
+        <p>Restaurants, boutiques, artisans : je crée le site de votre commerce avec votre vraie carte, vos horaires et vos avis. Vous voyez le résultat avant de vous engager.</p>
+        <div class="ctas">
+          <a class="ghost" href="#projets">Voir les projets ↓</a>
+        </div>
+      </div>
+
+      <div class="showcase reveal">
+        <div class="browser">
+          <div class="bar"><span></span><span></span><span></span><div class="url" id="show-url">kevinhadad36.github.io/el-qaada</div></div>
+          <div class="screen" id="show-screen">
+            <img class="on" src="img/el-qaada.png" alt="Site de Toulouse Factory, smash burgers" data-url="kevinhadad36.github.io/el-qaada" data-name="Toulouse Factory">
+            <img src="img/grande-istanbul.png" alt="Site de Galata Grill, restaurant turc" data-url="kevinhadad36.github.io/grande-istanbul" data-name="Galata Grill" loading="lazy">
+            <img src="img/iqra-toulouse.png" alt="Site d'Iqra Toulouse, cours de Coran" data-url="kevinhadad36.github.io/iqra-toulouse" data-name="Iqra Toulouse" loading="lazy">
+            <img src="img/monimo.png" alt="Site de Monimo, agence immobilière" data-url="kevinhadad36.github.io/monimo" data-name="Monimo Immobilier" loading="lazy">
+          </div>
+        </div>
+        <div class="showcase-meta">
+          <span class="caption" id="show-name">Toulouse Factory</span>
+          <div class="dots" id="show-dots" aria-label="Choisir le projet affiché"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="names" aria-hidden="true">
+    <div class="names-track">
+      <span>Toulouse Factory</span><span>Galata Grill</span><span>Palesto</span><span>Beyrooth Mood</span><span>Librairie Sakina</span><span>KS Energie</span><span>Garage Saint-Agne</span><span>Iqra Toulouse</span><span>Monimo</span>
+      <span>Toulouse Factory</span><span>Galata Grill</span><span>Palesto</span><span>Beyrooth Mood</span><span>Librairie Sakina</span><span>KS Energie</span><span>Garage Saint-Agne</span><span>Iqra Toulouse</span><span>Monimo</span>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="band">
+    <div class="wrap two reveal">
+      <h2 class="heading">Un commerce sans site, c'est un client qui va chez le voisin.</h2>
+      <div>
+        <p class="sub">Quand quelqu'un cherche « kebab Toulouse » ou « garage près de chez moi », il compare en dix secondes.</p>
+        <p class="muted">Je conçois des sites vitrines rapides, lisibles sur téléphone, avec ce qui compte vraiment : la carte et les prix, les horaires, l'itinéraire, un bouton pour appeler et les liens de livraison. Chaque site a sa propre direction artistique, pensée pour le commerce et sa clientèle.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS -->
+  <section id="projets" class="band">
+    <div class="wrap">
+      <div class="head reveal">
+        <div>
+          <span class="caption">Sélection · 2026</span>
+          <h2 class="heading" style="margin-top:12px">Projets</h2>
+        </div>
+        <div class="filters" role="group" aria-label="Filtrer les projets">
+          <button aria-pressed="true" data-f="all">Tous · 9</button>
+          <button aria-pressed="false" data-f="resto">Restaurants · 4</button>
+          <button aria-pressed="false" data-f="commerce">Commerces & services · 5</button>
+        </div>
+      </div>
+
+      <div class="projects" id="projects">
+        <a class="project wide reveal" data-c="resto" href="https://kevinhadad36.github.io/el-qaada/" target="_blank" rel="noopener">
+          <div class="browser"><div class="bar"><span></span><span></span><span></span><div class="url">kevinhadad36.github.io/el-qaada</div></div><div class="screen"><img src="img/el-qaada.png" alt="Site de Toulouse Factory" loading="lazy"></div></div>
+          <div class="meta"><h3>Toulouse Factory</h3><span class="go">Voir le site ↗</span>
+            <p class="desc">Smash burgers et pizzas halal. Affiche punk rouge sang, carte filtrable, statut « ouvert maintenant » calculé en direct et liens Uber Eats et Deliveroo.</p>
+            <div class="tags"><span class="tag">Restaurant</span><span class="tag">Toulouse nord</span><span class="tag">Carte interactive</span></div></div>
+        </a>
+        <a class="project reveal" data-c="resto" href="https://kevinhadad36.github.io/grande-istanbul/" target="_blank" rel="noopener">
+          <div class="browser"><div class="bar"><span></span><span></span><span></span><div class="url">kevinhadad36.github.io/grande-istanbul</div></div><div class="screen"><img src="img/grande-istanbul.png" alt="Site de Galata Grill" loading="lazy"></div></div>
+          <div class="meta"><h3>Galata Grill</h3><span class="go">Voir le site ↗</span>
+            <p class="desc">Kebab, tacos et cuisine turque. Quatre pages : accueil, carte, restaurant, contact.</p>
+            <div class="tags"><span class="tag">Restaurant</span><span class="tag">4 pages</span></div></div>
+        </a>
+        <a class="project reveal" data-c="resto" href="https://kevinhadad36.github.io/palesto/" target="_blank" rel="noopener">
+          <div class="browser"><div class="bar"><span></span><span></span><span></span><div class="url">kevinhadad36.github.io/palesto</div></div><div class="screen"><img src="img/palesto.png" alt="Site de Palesto" loading="lazy"></div></div>
+          <div class="meta"><h3>Palesto</h3><span class="go">Voir le site ↗</span>
+            <p class="desc">Tacos français, burgers et snacks halal. Carte complète et commande en livraison.</p>
+            <div class="tags"><span class="tag">Restaurant</span><span class="tag">4 pages</span></div></div>
+        </a>
+        <a class="project reveal" data-c="resto" href="https://kevinhadad36.github.io/beyrooth-mood/" target="_blank" rel="noopener">
+          <div class="browser"><div class="bar"><span></span><span></span><span></span><div class="url">kevinhadad36.github.io/beyrooth-mood</div></div><div class="screen"><img src="img/beyrooth-mood.png" alt="Site de Beyrooth Mood" loading="lazy"></div></div>
+          <div class="meta"><h3>Beyrooth Mood</h3><span class="go">Voir le site ↗</span>
+            <p class="desc">Restaurant libanais : mezzés, grillades, traiteur. Ambiance « ardoise de marché » en vert cèdre.</p>
+            <div class="tags"><span class="tag">Restaurant</span><span class="tag">Centre-ville</span></div></div>
+        </a>
+        <a class="project reveal" data-c="commerce" href="https://kevinhadad36.github.io/librairie-tawbah/" target="_blank" rel="noopener">
+          <div class="browser"><div class="bar"><span></span><span></span><span></span><div class="url">kevinhadad36.github.io/librairie-tawbah</div></div><div class="screen"><img src="img/librairie-tawbah.png" alt="Site de la Librairie Sakina" loading="lazy"></div></div>
+          <div class="meta"><h3>Librairie Sakina</h3><span class="go">Voir le site ↗</span>
+            <p class="desc">Boutique de vêtements, livres et parfums. Treize pages, catalogue par rayon, favoris et panier.</p>
+            <div class="tags"><span class="tag">Boutique</span><span class="tag">13 pages</span><span class="tag">Catalogue</span></div></div>
+        </a>
+        <a class="project wide reveal" data-c="commerce" href="https://kevinhadad36.github.io/ks-energie/" target="_blank" rel="noopener">
+          <div class="browser"><div class="bar"><span></span><span></span><span></span><div class="url">kevinhadad36.github.io/ks-energie</div></div><div class="screen"><img src="img/ks-energie.png" alt="Site de KS Energie" loading="lazy"></div></div>
+          <div class="meta"><h3>KS Energie</h3><span class="go">Voir le site ↗</span>
+            <p class="desc">Chauffage, climatisation et plomberie à Labarthe-sur-Lèze. Services, zone d'intervention et demande de devis.</p>
+            <div class="tags"><span class="tag">Artisan</span><span class="tag">Devis en ligne</span></div></div>
+        </a>
+        <a class="project reveal" data-c="commerce" href="https://kevinhadad36.github.io/garage-saint-agne/" target="_blank" rel="noopener">
+          <div class="browser"><div class="bar"><span></span><span></span><span></span><div class="url">kevinhadad36.github.io/garage-saint-agne</div></div><div class="screen"><img src="img/garage-saint-agne.png" alt="Site du Garage Saint-Agne" loading="lazy"></div></div>
+          <div class="meta"><h3>Garage Saint-Agne</h3><span class="go">Voir le site ↗</span>
+            <p class="desc">Garage automobile : entretien, mécanique, pneus, carrosserie. Prise de rendez-vous en ligne.</p>
+            <div class="tags"><span class="tag">Garage</span><span class="tag">Rendez-vous</span></div></div>
+        </a>
+        <a class="project reveal" data-c="commerce" href="https://kevinhadad36.github.io/iqra-toulouse/" target="_blank" rel="noopener">
+          <div class="browser"><div class="bar"><span></span><span></span><span></span><div class="url">kevinhadad36.github.io/iqra-toulouse</div></div><div class="screen"><img src="img/iqra-toulouse.png" alt="Site d'Iqra Toulouse" loading="lazy"></div></div>
+          <div class="meta"><h3>Iqra Toulouse</h3><span class="go">Voir le site ↗</span>
+            <p class="desc">Cours particuliers de lecture du Coran, à domicile ou en visio. Thème clair et sombre automatique.</p>
+            <div class="tags"><span class="tag">Enseignement</span><span class="tag">Contact WhatsApp</span></div></div>
+        </a>
+        <a class="project wide reveal" data-c="commerce" href="https://kevinhadad36.github.io/monimo/" target="_blank" rel="noopener">
+          <div class="browser"><div class="bar"><span></span><span></span><span></span><div class="url">kevinhadad36.github.io/monimo</div></div><div class="screen"><img src="img/monimo.png" alt="Site de Monimo Immobilier" loading="lazy"></div></div>
+          <div class="meta"><h3>Monimo Immobilier</h3><span class="go">Voir le site ↗</span>
+            <p class="desc">Agence immobilière à Moroni, Comores. Biens à louer et à vendre avec filtres, fiches détaillées et contact WhatsApp prérempli.</p>
+            <div class="tags"><span class="tag">Immobilier</span><span class="tag">Catalogue de biens</span></div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" class="band">
+    <div class="wrap">
+      <div class="two reveal">
+        <h2 class="heading">Vous voyez votre site avant de dire oui.</h2>
+        <p class="sub muted">Pas de devis abstrait ni de maquette en noir et blanc. Je construis d'abord une vraie version de votre site, avec vos informations, et je vous la montre.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><span class="n">01</span><h3>Repérage</h3><p>Je repère les commerces qui ouvrent ou qui n'ont pas encore de site, et je regarde comment leurs clients les cherchent aujourd'hui.</p></div>
+        <div class="step reveal"><span class="n">02</span><h3>Maquette réelle</h3><p>Je récupère votre carte, vos prix, vos horaires et vos avis publics, je choisis une direction artistique adaptée et je monte le site complet.</p></div>
+        <div class="step reveal"><span class="n">03</span><h3>Présentation</h3><p>Je vous montre le site en ligne, sur ordinateur et sur téléphone. On ajuste ensemble les textes, les photos et les couleurs.</p></div>
+        <div class="step reveal"><span class="n">04</span><h3>Mise en ligne</h3><p>Votre nom de domaine, vos vraies photos, vos coordonnées : le site est publié et je reste disponible pour les mises à jour.</p></div>
+      </div>
+      <div class="note reveal">
+        <b>À noter</b>
+        <p>Les projets présentés ici sont des maquettes réalisées pour de vrais commerces. Pour respecter ceux qui n'ont pas donné suite, certains noms ont été changés et les adresses et numéros de téléphone ont été remplacés.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INCLUS -->
+  <section id="inclus" class="band">
+    <div class="wrap">
+      <div class="two reveal" style="margin-bottom:48px">
+        <h2 class="heading">Ce que comprend chaque site</h2>
+        <p class="muted">Tout ce qu'un client cherche avant de venir, sans rien de superflu.</p>
+      </div>
+      <ul class="included reveal">
+        <li><span>✦</span><span>Adapté au téléphone, à la tablette et à l'ordinateur</span></li>
+        <li><span>✦</span><span>Carte, prestations ou catalogue avec les prix</span></li>
+        <li><span>✦</span><span>Horaires, et en option un statut « ouvert maintenant » en direct</span></li>
+        <li><span>✦</span><span>Bouton d'appel, WhatsApp et itinéraire Google Maps</span></li>
+        <li><span>✦</span><span>Liens Uber Eats, Deliveroo et réseaux sociaux</span></li>
+        <li><span>✦</span><span>Bases du référencement Google (titres, descriptions, données locales)</span></li>
+        <li><span>✦</span><span>Direction artistique propre à votre commerce</span></li>
+        <li><span>✦</span><span>Site rapide, sans abonnement à un constructeur</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="band" style="border-top:0;padding-top:0">
+    <div class="wrap">
+      <div class="contact reveal">
+        <div>
+          <span class="caption" style="color:#555">Contact</span>
+          <h2 class="display" style="font-size:clamp(36px,5vw,64px);margin-top:12px">Votre commerce mérite un site.</h2>
+          <p class="muted" style="margin-top:16px;max-width:44ch">Envoyez-moi le nom de votre commerce : je vous prépare une première version.</p>
+        </div>
+        <div class="actions">
+          <a class="pill" href="https://wa.me/33641478339?text=Bonjour%20Kevin%2C%20je%20voudrais%20un%20site%20pour%20mon%20commerce." target="_blank" rel="noopener">Écrire sur WhatsApp →</a>
+          <a class="ghost" href="tel:+33641478339">Appeler le 06 41 47 83 39</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© <span id="y">2026</span> Kevin · Conception de sites vitrines</span>
+    <span><a href="#projets">Projets</a> · <a href="#process">Process</a> · <a href="#contact">Contact</a></span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- Vitrine du hero : fondu entre quelques projets ----------
+  const imgs = [...document.querySelectorAll('#show-screen img')];
+  const dots = document.getElementById('show-dots');
+  let cur = 0, timer;
+  imgs.forEach((im, i) => {
+    const b = document.createElement('button');
+    b.setAttribute('aria-label', im.dataset.name);
+    b.setAttribute('aria-current', i === 0);
+    b.addEventListener('click', () => { show(i); restart(); });
+    dots.appendChild(b);
+  });
+  function show(i){
+    imgs[cur].classList.remove('on'); dots.children[cur].setAttribute('aria-current', false);
+    cur = i;
+    imgs[cur].classList.add('on'); dots.children[cur].setAttribute('aria-current', true);
+    document.getElementById('show-url').textContent = imgs[cur].dataset.url;
+    document.getElementById('show-name').textContent = imgs[cur].dataset.name;
+  }
+  function restart(){ clearInterval(timer); if (!reduce) timer = setInterval(() => show((cur + 1) % imgs.length), 4000); }
+  restart();
+
+  // ---------- Filtres des projets ----------
+  const fbtns = document.querySelectorAll('.filters button');
+  fbtns.forEach(b => b.addEventListener('click', () => {
+    fbtns.forEach(x => x.setAttribute('aria-pressed', x === b));
+    document.querySelectorAll('.project').forEach(p => {
+      p.hidden = b.dataset.f !== 'all' && p.dataset.c !== b.dataset.f;
+      if (!p.hidden) p.classList.add('in');
+    });
+  }));
+
+  // ---------- Apparitions au défilement (le défilement reste natif) ----------
+  if ('IntersectionObserver' in window && !reduce) {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }), { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+</script>
+</body>
+</html>
