@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Formation — Apprendre à créer des sites</title>
-<meta name="description" content="Apprenez à créer des sites vitrines pour les commerces : direction artistique, construction avec l'IA, mise en ligne et premiers clients. Demande par WhatsApp avec le budget de votre choix.">
+<title>Formation — Créer des sites professionnels avec l'IA</title>
+<meta name="description" content="Apprenez à créer des sites professionnels avec l'IA : direction artistique, construction avec l'IA, mise en ligne et premiers clients. Demande par WhatsApp avec le budget de votre choix.">
 <meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,6 +47,30 @@
   .nav ul a:hover,.nav ul a[aria-current="page"]{color:var(--spark)}
   .nav ul a:hover::after,.nav ul a[aria-current="page"]::after{right:0}
   .nav .pill{padding:9px 20px;font-size:14px}
+  .pill.lg,.ghost.lg{padding:17px 32px;font-size:18px}
+  .nav-actions{display:flex;align-items:center;gap:10px}
+
+  /* Bouton menu (téléphone et tablette) */
+  .burger{display:none;width:42px;height:42px;flex:0 0 42px;border-radius:999px;border:1px solid var(--cream);background:transparent;color:var(--cream);
+    align-items:center;justify-content:center;cursor:pointer}
+  .burger span,.burger span::before,.burger span::after{display:block;width:18px;height:1.5px;background:currentColor;transition:transform .25s,background .25s}
+  .burger span{position:relative}
+  .burger span::before,.burger span::after{content:"";position:absolute;left:0}
+  .burger span::before{top:-6px}.burger span::after{top:6px}
+  .burger[aria-expanded="true"] span{background:transparent}
+  .burger[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+  .burger[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+  .nav.menu-open{background:var(--void)}
+  .menu{position:fixed;inset:0;z-index:40;background:var(--void);padding:92px var(--gutter) 32px;display:flex;flex-direction:column;justify-content:space-between;gap:32px;
+    overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+  .menu.open{opacity:1;visibility:visible}
+  .menu ul{list-style:none}
+  .menu ul a{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid #1f1f1f;
+    font:400 clamp(28px,8vw,40px)/1.1 var(--display);font-stretch:125%;letter-spacing:-.02em}
+  .menu ul a span{font:400 14px/1 var(--body);color:var(--smoke)}
+  .menu ul a:hover,.menu ul a:focus-visible,.menu ul a[aria-current="page"]{color:var(--spark)}
+  .menu-foot{display:grid;gap:12px}
+  .menu-foot .pill,.menu-foot .ghost{justify-content:center}
 
   .hero{padding:clamp(56px,9vw,112px) 0 var(--section)}
   .hero .eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:28px}
@@ -112,6 +136,7 @@
 
   @media (max-width:960px){
     .nav ul{display:none}
+    .burger{display:inline-flex}
     .two,.apply{grid-template-columns:1fr}
     .for{grid-template-columns:1fr}
     .modules li{grid-template-columns:56px 1fr}
@@ -121,6 +146,12 @@
     .budgets{grid-template-columns:1fr}
     .nav .pill{padding:8px 16px}
     .sub{font-size:20px}
+    .pill.lg,.ghost.lg{padding:16px 26px;font-size:17px}
+  }
+  @media (max-width:400px){
+    .nav-in{gap:10px}
+    .nav .pill{padding:8px 12px;font-size:13px}
+    .brand{font-size:18px}
   }
   @media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important}}
 </style>
@@ -131,24 +162,41 @@
   <div class="wrap nav-in">
     <a href="index.html" class="brand"><i></i>Kevin</a>
     <ul>
-      <li><a href="index.html#projets">Projets</a></li>
+      <li><a href="index.html#projets">Nos réalisations</a></li>
       <li><a href="index.html#process">Process</a></li>
       <li><a href="formation.html" aria-current="page">Formation</a></li>
       <li><a href="index.html#contact">Contact</a></li>
     </ul>
-    <a class="pill" href="#demande">Faire ma demande</a>
+    <div class="nav-actions">
+      <a class="pill" href="#demande">Faire ma demande</a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"><span></span></button>
+    </div>
   </div>
 </nav>
+
+<div class="menu" id="menu" aria-label="Menu">
+  <ul>
+    <li><a href="index.html#projets">Nos réalisations <span>01</span></a></li>
+    <li><a href="index.html#process">Process <span>02</span></a></li>
+    <li><a href="index.html#inclus">Ce qui est inclus <span>03</span></a></li>
+    <li><a href="formation.html" aria-current="page">Formation <span>04</span></a></li>
+    <li><a href="index.html#contact">Contact <span>05</span></a></li>
+  </ul>
+  <div class="menu-foot">
+    <a class="pill lg" href="#demande">Faire ma demande →</a>
+    <a class="ghost lg" href="tel:+33641478339">Appeler le 06 41 47 83 39</a>
+  </div>
+</div>
 
 <main>
   <header class="hero">
     <div class="wrap">
-      <div class="eyebrow caption"><span class="dot"></span>Formation · Créer des sites vitrines</div>
-      <h1 class="display">Apprenez à créer des sites qui se vendent.</h1>
-      <p class="sub muted">La méthode que j'utilise pour mes propres projets : trouver un style, construire le site, le mettre en ligne et le présenter à un vrai commerce.</p>
+      <div class="eyebrow caption"><span class="dot"></span>Formation · De l'idée à la mise en ligne</div>
+      <h1 class="display">Apprenez à créer des sites professionnels avec l'IA.</h1>
+      <p class="sub muted">De l'idée à la mise en ligne : la méthode que nous utilisons pour nos propres projets. Trouver un style, construire le site avec l'IA, le mettre en ligne et le présenter à de vrais clients.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:36px">
-        <a class="pill" href="#demande">Choisir mon budget →</a>
-        <a class="ghost" href="index.html#projets">Voir mes réalisations</a>
+        <a class="pill lg" href="#demande">Choisir mon budget →</a>
+        <a class="ghost lg" href="index.html#projets">Voir nos réalisations</a>
       </div>
     </div>
   </header>
@@ -244,12 +292,28 @@
 
 <footer>
   <div class="wrap foot">
-    <span>© <span id="y">2026</span> Kevin · Conception de sites vitrines</span>
-    <span><a href="index.html#projets">Projets</a> · <a href="formation.html">Formation</a> · <a href="index.html#contact">Contact</a></span>
+    <span>© <span id="y">2026</span> Kevin · Conception de sites professionnels</span>
+    <span><a href="index.html#projets">Nos réalisations</a> · <a href="formation.html">Formation</a> · <a href="index.html#contact">Contact</a></span>
   </div>
 </footer>
 
-<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  // ---------- Menu mobile ----------
+  const nav = document.querySelector('.nav'), burger = document.querySelector('.burger'), menu = document.getElementById('menu');
+  function setMenu(open){
+    menu.classList.toggle('open', open);
+    nav.classList.toggle('menu-open', open);
+    burger.setAttribute('aria-expanded', open);
+    burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  burger.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && menu.classList.contains('open')) { setMenu(false); burger.focus(); } });
+  matchMedia('(min-width:961px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
+</script>
 <script src="formation.js"></script>
 </body>
 </html>

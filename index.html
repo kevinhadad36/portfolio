@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kevin — Sites vitrines pour commerces</title>
-<meta name="description" content="Je conçois des sites vitrines pour les commerces de Toulouse : restaurants, boutiques, artisans. Une maquette réalisée avec vos vraies informations avant même notre premier rendez-vous.">
+<title>Kevin — Conception de sites professionnels</title>
+<meta name="description" content="Un site professionnel, c'est des clients en plus. Nous concevons des sites qui attirent de nouveaux clients, mettent votre activité en valeur et inspirent confiance dès le premier regard.">
 <meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,6 +51,7 @@
   .ghost{display:inline-flex;align-items:center;gap:10px;padding:12px 25px;border-radius:50px;border:1px solid var(--cream);color:var(--cream);
     font:400 16px/1.3 var(--body);transition:background .2s,color .2s}
   .ghost:hover{background:var(--cream);color:var(--void)}
+  .pill.lg,.ghost.lg{padding:17px 32px;font-size:18px}
   .tag{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--smoke);font-size:12px;line-height:1.4;color:var(--fog)}
 
   /* ---------- Nav ---------- */
@@ -64,6 +65,31 @@
   .nav ul a:hover{color:var(--spark)}
   .nav ul a:hover::after{right:0}
   .nav .pill{padding:9px 20px;font-size:14px}
+  .nav-actions{display:flex;align-items:center;gap:10px}
+
+  /* Bouton menu (téléphone et tablette) */
+  .burger{display:none;width:42px;height:42px;flex:0 0 42px;border-radius:999px;border:1px solid var(--cream);background:transparent;color:var(--cream);
+    align-items:center;justify-content:center;cursor:pointer}
+  .burger span,.burger span::before,.burger span::after{display:block;width:18px;height:1.5px;background:currentColor;transition:transform .25s,background .25s}
+  .burger span{position:relative}
+  .burger span::before,.burger span::after{content:"";position:absolute;left:0}
+  .burger span::before{top:-6px}.burger span::after{top:6px}
+  .burger[aria-expanded="true"] span{background:transparent}
+  .burger[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+  .burger[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+  .nav.menu-open{background:var(--void)}
+
+  /* Menu plein écran */
+  .menu{position:fixed;inset:0;z-index:40;background:var(--void);padding:92px var(--gutter) 32px;display:flex;flex-direction:column;justify-content:space-between;gap:32px;
+    overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+  .menu.open{opacity:1;visibility:visible}
+  .menu ul{list-style:none}
+  .menu ul a{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid #1f1f1f;
+    font:400 clamp(28px,8vw,40px)/1.1 var(--display);font-stretch:125%;letter-spacing:-.02em}
+  .menu ul a span{font:400 14px/1 var(--body);color:var(--smoke)}
+  .menu ul a:hover,.menu ul a:focus-visible{color:var(--spark)}
+  .menu-foot{display:grid;gap:12px}
+  .menu-foot .pill,.menu-foot .ghost{justify-content:center}
 
   /* ---------- Hero ---------- */
   /* Hero : vidéo de démonstration en fond, sans son, sous un voile noir */
@@ -77,9 +103,9 @@
   .hero .eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:28px}
   .hero .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--spark);box-shadow:0 0 0 0 rgba(220,255,79,.6);animation:ping 2.2s infinite}
   @keyframes ping{0%{box-shadow:0 0 0 0 rgba(220,255,79,.55)}70%{box-shadow:0 0 0 10px rgba(220,255,79,0)}100%{box-shadow:0 0 0 0 rgba(220,255,79,0)}}
-  .hero h1{max-width:15ch}
+  .hero h1{max-width:16ch}
   .hero-row{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-top:36px;flex-wrap:wrap}
-  .hero-row p{max-width:46ch;color:var(--fog)}
+  .hero-row p{max-width:40ch;color:var(--cream);opacity:.88}
   .hero-row .ctas{display:flex;gap:12px;flex-wrap:wrap}
 
   /* Fenêtre de navigateur */
@@ -91,18 +117,12 @@
   .browser .screen{position:relative;aspect-ratio:16/10;background:#0b0b0b;overflow:hidden}
   .browser .screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
 
-  .showcase{margin-top:clamp(48px,7vw,80px)}
-  .showcase .screen img{opacity:0;transition:opacity .9s ease}
-  .showcase .screen img.on{opacity:1}
-  .showcase-meta{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:16px;flex-wrap:wrap}
-  .dots{display:flex;gap:8px}
-  .dots button{width:28px;height:4px;border-radius:999px;border:0;background:#333;cursor:pointer;padding:0}
-  .dots button[aria-current="true"]{background:var(--spark)}
-
   /* ---------- Intro ---------- */
   .band{padding:var(--section) 0;border-top:1px solid #1f1f1f}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,96px)}
   .two p + p{margin-top:16px}
+  .bigger{margin-top:clamp(48px,7vw,80px);padding-top:clamp(32px,5vw,56px);border-top:1px solid #1f1f1f;display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+  .bigger p{margin-top:12px;max-width:40ch}
 
   /* Bandeau de noms */
   .names{border-top:1px solid #1f1f1f;border-bottom:1px solid #1f1f1f;overflow:hidden;padding:26px 0}
@@ -127,8 +147,10 @@
   .project:hover .screen img{transform:scale(1.03)}
   .project .meta{display:grid;grid-template-columns:1fr auto;gap:6px 16px;margin-top:18px;align-items:start}
   .project h3{font:400 24px/1.25 var(--display);font-stretch:125%;letter-spacing:-.02em}
-  .project .go{font-size:14px;display:inline-flex;align-items:center;gap:6px;padding-top:4px;transition:color .2s}
-  .project:hover .go{color:var(--spark)}
+  /* « Voir le site » : vrai bouton crème, bien visible, qui passe au chartreuse au survol */
+  .project .go{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;background:var(--cream);color:var(--void);
+    font:400 15px/1.2 var(--body);white-space:nowrap;transition:background .2s,transform .2s}
+  .project:hover .go,.project:focus-visible .go{background:var(--spark);transform:translateY(-1px)}
   .project .desc{grid-column:1/-1;color:var(--fog);font-size:15px;max-width:62ch}
   .project .tags{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
   .project[hidden]{display:none}
@@ -176,6 +198,7 @@
   /* ---------- Responsive ---------- */
   @media (max-width:960px){
     .nav ul{display:none}
+    .burger{display:inline-flex}
     .two{grid-template-columns:1fr}
     .steps{grid-template-columns:1fr 1fr}
     .contact{grid-template-columns:1fr}
@@ -189,6 +212,12 @@
     .browser .url{display:none}
     .nav .pill{padding:8px 16px}
     .sub{font-size:20px}
+    .pill.lg,.ghost.lg{padding:16px 26px;font-size:17px}
+  }
+  @media (max-width:400px){
+    .nav-in{gap:10px}
+    .nav .pill{padding:8px 12px;font-size:13px}
+    .brand{font-size:18px}
   }
   @media (prefers-reduced-motion:reduce){
     *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
@@ -203,15 +232,32 @@
   <div class="wrap nav-in">
     <a href="#top" class="brand"><i></i>Kevin</a>
     <ul>
-      <li><a href="#projets">Projets</a></li>
+      <li><a href="#projets">Nos réalisations</a></li>
       <li><a href="#process">Process</a></li>
       <li><a href="#inclus">Ce qui est inclus</a></li>
       <li><a href="formation.html">Formation</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a class="pill" href="https://wa.me/33641478339?text=Bonjour%20Kevin%2C%20je%20voudrais%20un%20site%20pour%20mon%20commerce." target="_blank" rel="noopener">Parlons de votre site</a>
+    <div class="nav-actions">
+      <a class="pill" href="#contact">Parlons de votre site</a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"><span></span></button>
+    </div>
   </div>
 </nav>
+
+<div class="menu" id="menu" aria-label="Menu">
+  <ul>
+    <li><a href="#projets">Nos réalisations <span>01</span></a></li>
+    <li><a href="#process">Process <span>02</span></a></li>
+    <li><a href="#inclus">Ce qui est inclus <span>03</span></a></li>
+    <li><a href="formation.html">Formation <span>04</span></a></li>
+    <li><a href="#contact">Contact <span>05</span></a></li>
+  </ul>
+  <div class="menu-foot">
+    <a class="pill lg" href="https://wa.me/33641478339?text=Bonjour%2C%20je%20voudrais%20un%20site%20professionnel%20pour%20mon%20activit%C3%A9." target="_blank" rel="noopener">Nous écrire sur WhatsApp →</a>
+    <a class="ghost lg" href="tel:+33641478339">Appeler le 06 41 47 83 39</a>
+  </div>
+</div>
 
 <main id="top">
 
@@ -221,12 +267,12 @@
       <source src="video/hero.mp4" type="video/mp4">
     </video>
     <div class="wrap">
-      <div class="eyebrow caption"><span class="dot"></span>Conception de sites vitrines · Toulouse</div>
-      <h1 class="display">Des sites qui donnent envie de pousser la porte.</h1>
+      <div class="eyebrow caption"><span class="dot"></span>Conception de sites professionnels</div>
+      <h1 class="display">Un site professionnel, c'est des clients en plus.</h1>
       <div class="hero-row">
-        <p>Restaurants, boutiques, artisans : je crée le site de votre commerce avec votre vraie carte, vos horaires et vos avis. Vous voyez le résultat avant de vous engager.</p>
+        <p class="sub">Attirez de nouveaux clients, mettez votre activité en valeur et donnez-leur toutes les raisons de vous choisir.</p>
         <div class="ctas">
-          <a class="ghost" href="#projets">Voir les projets ↓</a>
+          <a class="pill lg" href="#projets">Voir nos réalisations ↓</a>
         </div>
       </div>
     </div>
@@ -241,11 +287,21 @@
 
   <!-- INTRO -->
   <section class="band">
-    <div class="wrap two reveal">
-      <h2 class="heading">Un commerce sans site, c'est un client qui va chez le voisin.</h2>
-      <div>
-        <p class="sub">Quand quelqu'un cherche « kebab Toulouse » ou « garage près de chez moi », il compare en dix secondes.</p>
-        <p class="muted">Je conçois des sites vitrines rapides, lisibles sur téléphone, avec ce qui compte vraiment : la carte et les prix, les horaires, l'itinéraire, un bouton pour appeler et les liens de livraison. Chaque site a sa propre direction artistique, pensée pour le commerce et sa clientèle.</p>
+    <div class="wrap">
+      <div class="two reveal">
+        <h2 class="heading">Votre site internet est la vitrine digitale de votre activité.</h2>
+        <div>
+          <p class="sub">C'est votre carte de visite en ligne, et le premier contact entre votre activité et vos futurs clients.</p>
+          <p class="muted">Un site professionnel fait la différence entre une entreprise simplement présente sur les réseaux sociaux et une enseigne qui inspire immédiatement confiance et professionnalisme.</p>
+          <p class="muted">Nous concevons votre site dans les moindres détails : votre image, vos services, vos informations essentielles et votre parcours client. Un site pensé pour vous rendre visible, donner confiance dès le premier regard et transformer chaque recherche en une nouvelle occasion de gagner un client.</p>
+        </div>
+      </div>
+      <div class="bigger reveal">
+        <div>
+          <h3 class="display" style="font-size:clamp(36px,5vw,64px)">Voyez plus grand.</h3>
+          <p class="sub muted">Votre commerce mérite un site à la hauteur de ce que vous proposez.</p>
+        </div>
+        <a class="pill lg" href="#contact">Nous contacter →</a>
       </div>
     </div>
   </section>
@@ -256,7 +312,7 @@
       <div class="head reveal">
         <div>
           <span class="caption">Sélection · 2026</span>
-          <h2 class="heading" style="margin-top:12px">Projets</h2>
+          <h2 class="heading" style="margin-top:12px">Nos réalisations</h2>
         </div>
         <div class="filters" role="group" aria-label="Filtrer les projets">
           <button aria-pressed="true" data-f="all">Tous · 9</button>
@@ -329,13 +385,13 @@
     <div class="wrap">
       <div class="two reveal">
         <h2 class="heading">Vous voyez votre site avant de dire oui.</h2>
-        <p class="sub muted">Pas de devis abstrait ni de maquette en noir et blanc. Je construis d'abord une vraie version de votre site, avec vos informations, et je vous la montre.</p>
+        <p class="sub muted">Pas de devis abstrait ni de maquette en noir et blanc. Nous construisons d'abord une vraie version de votre site, avec vos informations, et nous vous la montrons.</p>
       </div>
       <div class="steps">
-        <div class="step reveal"><span class="n">01</span><h3>Repérage</h3><p>Je repère les commerces qui ouvrent ou qui n'ont pas encore de site, et je regarde comment leurs clients les cherchent aujourd'hui.</p></div>
-        <div class="step reveal"><span class="n">02</span><h3>Maquette réelle</h3><p>Je récupère votre carte, vos prix, vos horaires et vos avis publics, je choisis une direction artistique adaptée et je monte le site complet.</p></div>
-        <div class="step reveal"><span class="n">03</span><h3>Présentation</h3><p>Je vous montre le site en ligne, sur ordinateur et sur téléphone. On ajuste ensemble les textes, les photos et les couleurs.</p></div>
-        <div class="step reveal"><span class="n">04</span><h3>Mise en ligne</h3><p>Votre nom de domaine, vos vraies photos, vos coordonnées : le site est publié et je reste disponible pour les mises à jour.</p></div>
+        <div class="step reveal"><span class="n">01</span><h3>Analyse</h3><p>Nous étudions votre activité, votre clientèle et la façon dont vos clients vous cherchent en ligne aujourd'hui.</p></div>
+        <div class="step reveal"><span class="n">02</span><h3>Maquette réelle</h3><p>Vos services, vos prix, vos horaires et vos avis, dans une direction artistique choisie pour votre activité : nous montons le site complet.</p></div>
+        <div class="step reveal"><span class="n">03</span><h3>Présentation</h3><p>Nous vous montrons le site en ligne, sur ordinateur et sur téléphone, et nous ajustons ensemble les textes, les photos et les couleurs.</p></div>
+        <div class="step reveal"><span class="n">04</span><h3>Mise en ligne</h3><p>Votre nom de domaine, vos vraies photos, vos coordonnées : le site est publié et nous restons disponibles pour les mises à jour.</p></div>
       </div>
       <div class="note reveal">
         <b>À noter</b>
@@ -358,7 +414,7 @@
         <li><span>✦</span><span>Bouton d'appel, WhatsApp et itinéraire Google Maps</span></li>
         <li><span>✦</span><span>Liens Uber Eats, Deliveroo et réseaux sociaux</span></li>
         <li><span>✦</span><span>Bases du référencement Google (titres, descriptions, données locales)</span></li>
-        <li><span>✦</span><span>Direction artistique propre à votre commerce</span></li>
+        <li><span>✦</span><span>Direction artistique propre à votre activité</span></li>
         <li><span>✦</span><span>Site rapide, sans abonnement à un constructeur</span></li>
       </ul>
     </div>
@@ -369,8 +425,11 @@
     <div class="wrap">
       <a class="teach reveal" href="formation.html">
         <span class="caption">Formation</span>
-        <span class="teach-row"><span class="heading">Vous voulez apprendre à faire ça ?</span><span class="pill">Découvrir la formation →</span></span>
-        <span class="muted">Direction artistique, construction avec l'IA, mise en ligne et premiers clients : la méthode derrière ces projets.</span>
+        <span class="heading" style="max-width:20ch">Apprenez à créer des sites professionnels avec l'IA</span>
+        <span class="teach-row">
+          <span class="sub muted" style="max-width:46ch">De l'idée à la mise en ligne. Apprenez à utiliser l'intelligence artificielle pour concevoir des sites professionnels et adaptés à de vrais clients.</span>
+          <span class="pill lg">Découvrir la formation →</span>
+        </span>
       </a>
     </div>
   </section>
@@ -381,12 +440,12 @@
       <div class="contact reveal">
         <div>
           <span class="caption" style="color:#555">Contact</span>
-          <h2 class="display" style="font-size:clamp(36px,5vw,64px);margin-top:12px">Votre commerce mérite un site.</h2>
-          <p class="muted" style="margin-top:16px;max-width:44ch">Envoyez-moi le nom de votre commerce : je vous prépare une première version.</p>
+          <h2 class="display" style="font-size:clamp(36px,5vw,64px);margin-top:12px">Parlons de votre projet.</h2>
+          <p class="muted" style="margin-top:16px;max-width:44ch">Présentez-nous votre activité : nous vous préparons une première version de votre site.</p>
         </div>
         <div class="actions">
-          <a class="pill" href="https://wa.me/33641478339?text=Bonjour%20Kevin%2C%20je%20voudrais%20un%20site%20pour%20mon%20commerce." target="_blank" rel="noopener">Écrire sur WhatsApp →</a>
-          <a class="ghost" href="tel:+33641478339">Appeler le 06 41 47 83 39</a>
+          <a class="pill lg" href="https://wa.me/33641478339?text=Bonjour%2C%20je%20voudrais%20un%20site%20professionnel%20pour%20mon%20activit%C3%A9." target="_blank" rel="noopener">Nous écrire sur WhatsApp →</a>
+          <a class="ghost lg" href="tel:+33641478339">Appeler le 06 41 47 83 39</a>
         </div>
       </div>
     </div>
@@ -395,8 +454,8 @@
 
 <footer>
   <div class="wrap foot">
-    <span>© <span id="y">2026</span> Kevin · Conception de sites vitrines</span>
-    <span><a href="#projets">Projets</a> · <a href="#process">Process</a> · <a href="formation.html">Formation</a> · <a href="#contact">Contact</a></span>
+    <span>© <span id="y">2026</span> Kevin · Conception de sites professionnels</span>
+    <span><a href="#projets">Nos réalisations</a> · <a href="#process">Process</a> · <a href="formation.html">Formation</a> · <a href="#contact">Contact</a></span>
   </div>
 </footer>
 
@@ -415,6 +474,20 @@
   const onScroll = () => nav.classList.toggle('on-hero', scrollY < hero.offsetHeight - 80);
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  // ---------- Menu mobile ----------
+  const burger = document.querySelector('.burger'), menu = document.getElementById('menu');
+  function setMenu(open){
+    menu.classList.toggle('open', open);
+    nav.classList.toggle('menu-open', open);
+    burger.setAttribute('aria-expanded', open);
+    burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  burger.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && menu.classList.contains('open')) { setMenu(false); burger.focus(); } });
+  matchMedia('(min-width:961px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
 
   // ---------- Filtres des projets ----------
   const fbtns = document.querySelectorAll('.filters button');
