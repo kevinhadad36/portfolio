@@ -154,6 +154,14 @@
   .project .desc{grid-column:1/-1;color:var(--fog);font-size:15px;max-width:62ch}
   .project .tags{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
   .project[hidden]{display:none}
+  /* Miniatures des écrans internes (espace élève, admin) */
+  .project .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+  .project .shots figure{border:1px solid #2a2a2a;border-radius:8px;overflow:hidden;background:var(--charcoal);transition:border-color .3s}
+  .project:hover .shots figure{border-color:#444}
+  .project .shots .thumb{overflow:hidden;aspect-ratio:16/10}
+  .project .shots img{width:100%;height:100%;object-fit:cover;object-position:top;transform:scale(1.55);transform-origin:50% 0}
+  .project .shots figcaption{font-size:12px;color:var(--fog);padding:8px 10px}
+  @media (max-width:520px){.project .shots{gap:6px}.project .shots figcaption{font-size:11px;padding:6px 8px}}
 
   /* ---------- Process ---------- */
   .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
@@ -280,8 +288,8 @@
 
   <div class="names" aria-hidden="true">
     <div class="names-track">
-      <span>Toulouse Factory</span><span>Galata Grill</span><span>Palesto</span><span>Beyrooth Mood</span><span>Librairie Sakina</span><span>KS Energie</span><span>Garage Saint-Agne</span><span>Iqra Toulouse</span><span>Monimo</span>
-      <span>Toulouse Factory</span><span>Galata Grill</span><span>Palesto</span><span>Beyrooth Mood</span><span>Librairie Sakina</span><span>KS Energie</span><span>Garage Saint-Agne</span><span>Iqra Toulouse</span><span>Monimo</span>
+      <span>Toulouse Factory</span><span>Galata Grill</span><span>Palesto</span><span>Beyrooth Mood</span><span>Librairie Sakina</span><span>KS Energie</span><span>Garage Saint-Agne</span><span>Iqra Toulouse</span><span>Monimo</span><span>Umm Junayd</span>
+      <span>Toulouse Factory</span><span>Galata Grill</span><span>Palesto</span><span>Beyrooth Mood</span><span>Librairie Sakina</span><span>KS Energie</span><span>Garage Saint-Agne</span><span>Iqra Toulouse</span><span>Monimo</span><span>Umm Junayd</span>
     </div>
   </div>
 
@@ -315,13 +323,25 @@
           <h2 class="heading" style="margin-top:12px">Nos réalisations</h2>
         </div>
         <div class="filters" role="group" aria-label="Filtrer les projets">
-          <button aria-pressed="true" data-f="all">Tous · 9</button>
+          <button aria-pressed="true" data-f="all">Tous · 10</button>
+          <button aria-pressed="false" data-f="formation">Formation · 2</button>
           <button aria-pressed="false" data-f="resto">Restaurants · 4</button>
-          <button aria-pressed="false" data-f="commerce">Commerces & services · 5</button>
+          <button aria-pressed="false" data-f="commerce">Commerces & services · 4</button>
         </div>
       </div>
 
       <div class="projects" id="projects">
+        <a class="project wide reveal" data-c="formation" href="https://kevinhadad36.github.io/madrassat-umm-junayd/" target="_blank" rel="noopener">
+          <div class="browser"><div class="bar"><span></span><span></span><span></span><div class="url">kevinhadad36.github.io/madrassat-umm-junayd</div></div><div class="screen"><img src="img/madrassat-umm-junayd.png" alt="Site de Madrassat Umm Junayd, école en ligne" loading="lazy"></div></div>
+          <div class="shots">
+            <figure><div class="thumb"><img src="img/umm-junayd-espace.png" alt="Tableau de bord de l'espace élève" loading="lazy"></div><figcaption>Espace élève</figcaption></figure>
+            <figure><div class="thumb"><img src="img/umm-junayd-espace-sourate.png" alt="Révision pas à pas avec progression" loading="lazy"></div><figcaption>Révision pas à pas</figcaption></figure>
+            <figure><div class="thumb"><img src="img/umm-junayd-espace-admin.png" alt="Administration des comptes élèves" loading="lazy"></div><figcaption>Gestion des élèves</figcaption></figure>
+          </div>
+          <div class="meta"><h3>Madrassat Umm Junayd</h3><span class="go">Voir le site ↗</span>
+            <p class="desc">Plateforme d'apprentissage en ligne : programme détaillé, inscription en quelques clics, espace élève avec identifiant personnel, révisions pas à pas avec suivi de progression, et espace administrateur pour créer et gérer les comptes des élèves.</p>
+            <div class="tags"><span class="tag">Formation</span><span class="tag">Espace élève</span><span class="tag">Espace admin</span><span class="tag">Application web</span></div></div>
+        </a>
         <a class="project wide reveal" data-c="resto" href="https://kevinhadad36.github.io/el-qaada/" target="_blank" rel="noopener">
           <div class="browser"><div class="bar"><span></span><span></span><span></span><div class="url">kevinhadad36.github.io/el-qaada</div></div><div class="screen"><img src="img/el-qaada.png" alt="Site de Toulouse Factory" loading="lazy"></div></div>
           <div class="meta"><h3>Toulouse Factory</h3><span class="go">Voir le site ↗</span>
@@ -364,7 +384,7 @@
             <p class="desc">Garage automobile : entretien, mécanique, pneus, carrosserie. Prise de rendez-vous en ligne.</p>
             <div class="tags"><span class="tag">Garage</span><span class="tag">Rendez-vous</span></div></div>
         </a>
-        <a class="project reveal" data-c="commerce" href="https://kevinhadad36.github.io/iqra-toulouse/" target="_blank" rel="noopener">
+        <a class="project reveal" data-c="formation" href="https://kevinhadad36.github.io/iqra-toulouse/" target="_blank" rel="noopener">
           <div class="browser"><div class="bar"><span></span><span></span><span></span><div class="url">kevinhadad36.github.io/iqra-toulouse</div></div><div class="screen"><img src="img/iqra-toulouse.png" alt="Site d'Iqra Toulouse" loading="lazy"></div></div>
           <div class="meta"><h3>Iqra Toulouse</h3><span class="go">Voir le site ↗</span>
             <p class="desc">Cours particuliers de lecture du Coran, à domicile ou en visio. Thème clair et sombre automatique.</p>
